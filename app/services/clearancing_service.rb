@@ -20,6 +20,8 @@ class ClearancingService
 
 private
 
+  # only get items once
+  # this should clearance items not statuses?
   def clearance_items!(clearancing_status)
     if clearancing_status.item_ids_to_clearance.any?
       clearancing_status.clearance_batch.save!
@@ -33,15 +35,18 @@ private
   end
 
   def get_errors(potential_item_id)
-    case
-    when potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
+    if potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
       return "Item with id: #{potential_item_id} is not valid"
-    when Item.where(id: potential_item_id).empty?
+    end
+
+    item = Item.where(id: potential_item_id).first
+
+    if item.blank?
       return "Item with id: #{potential_item_id} could not be found"
-    when Item.sellable.where(id: potential_item_id).empty?
+    elsif !(item.status == "sellable")
       return "Item with id: #{potential_item_id} could not be clearanced"
-    else
-      return nil
+    elsif !(item.acceptably_clearance_priced?)
+      return "Item with id: #{potential_item_id} does not the minimum clearance pricing criteria"
     end
   end
 
