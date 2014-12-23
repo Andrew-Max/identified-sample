@@ -8,20 +8,31 @@
 </head>
 <body>
 
-<div class="container">
-  <h1>Retail Stock Clearance Tool</h1>
-  <%- if flash[:notice] -%>
-    <div class="alert alert-info" role="alert">
-      <%= flash[:notice].html_safe %>
+  <div class="container">
+    <div class="header">
+      <div class="nav-item left">
+        <h1>Retail Stock Clearance Tool</h1>
+      </div>
+      <div class="nav-item right">
+        <%#= link_to("View All Items", items_path) %>
+      </div>
+      <div class="nav-item right">
+        <%= link_to("Clearance Items", clearance_batches_path) %>
+      </div>
+      <hr>
     </div>
-  <%- end -%>
-  <%- if flash[:alert] -%>
-    <div class="alert alert-danger" role="alert">
-      <%= flash[:alert].html_safe %>
-    </div>
-  <%- end -%>
-  <%= yield %>
-</div>
+    <%- if flash[:notice] -%>
+      <div class="alert alert-info" role="alert">
+        <%= flash[:notice].html_safe %>
+      </div>
+    <%- end -%>
+    <%- if flash[:alert] -%>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:alert].html_safe %>
+      </div>
+    <%- end -%>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

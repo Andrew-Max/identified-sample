@@ -1,0 +1,20 @@
+.header {
+  display: block;
+
+  .nav-item {
+    display: inline-block;
+
+    &.right {
+      float: right;
+      margin-top: 25px;
+      margin-left: 30px;
+      text-decoration: none;
+      font-size: 24px;
+      color: #428BCA;
+    }
+  }
+  hr {
+    margin-top: 0;
+    border-top: 5px solid #888;
+  }
+}
