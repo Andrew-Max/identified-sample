@@ -7,7 +7,7 @@ class ClearancingService
 
     CSV.foreach(uploaded_file, headers: false) do |row|
       potential_item_id = row[0].to_i
-      clearancing_error = what_is_the_clearancing_error?(potential_item_id)
+      clearancing_error = get_errors(potential_item_id)
       if clearancing_error
         clearancing_status.errors << clearancing_error
       else
@@ -32,18 +32,17 @@ private
     clearancing_status
   end
 
-  def what_is_the_clearancing_error?(potential_item_id)
-    if potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
-      return "Item id #{potential_item_id} is not valid"
+  def get_errors(potential_item_id)
+    case
+    when potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
+      return "Item with id: #{potential_item_id} is not valid"
+    when Item.where(id: potential_item_id).empty?
+      return "Item with id: #{potential_item_id} could not be found"
+    when Item.sellable.where(id: potential_item_id).empty?
+      return "Item with id: #{potential_item_id} could not be clearanced"
+    else
+      return nil
     end
-    if Item.where(id: potential_item_id).none?
-      return "Item id #{potential_item_id} could not be found"
-    end
-    if Item.sellable.where(id: potential_item_id).none?
-      return "Item id #{potential_item_id} could not be clearanced"
-    end
-
-    return nil
   end
 
   def create_clearancing_status
