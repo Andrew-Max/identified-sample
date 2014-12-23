@@ -1,4 +1,5 @@
 class ClearanceBatchesController < ApplicationController
+  before_action :check_valid_file, only: :create
 
   def index
     @clearance_batches  = ClearanceBatch.all
@@ -21,4 +22,18 @@ class ClearanceBatchesController < ApplicationController
     redirect_to action: :index
   end
 
+  private
+
+  def check_valid_file
+    if params[:csv_batch_file] == nil
+      message = "You did not chose a file to upload"
+    elsif !(params[:csv_batch_file].original_filename.split(".").last == "csv")
+      message = "The file you uploaded was not a csv"
+    end
+
+    if message
+      flash[:alert] = message
+      return redirect_to action: :index
+    end
+  end
 end
