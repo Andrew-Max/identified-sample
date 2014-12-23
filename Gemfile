@@ -1,6 +1,5 @@
 source "https://rubygems.org"
 
-
 gem "rails", "4.1.1"
 gem "sqlite3"
 gem "sass-rails", "~> 4.0.3"
@@ -10,6 +9,11 @@ gem "jquery-rails"
 gem "bootstrap-sass", "~> 3.2.0"
 
 gem "sdoc", "~> 0.4.0",          group: :doc
+
+group :development do
+  gem "pry"
+  gem 'pry-nav'
+end
 
 group :test, :development do
   gem "spring"
