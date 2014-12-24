@@ -1,0 +1,21 @@
+<%= render partial: "batch", collection: @batches %>
+
+<h3>Items Not In Batches</h3>
+
+<table class="items-index">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Type</th>
+      <th class="name">Name</th>
+      <th>Size</th>
+      <th>Color</th>
+      <th>Status</th>
+      <th>Price</th>
+      <th>Sold On</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "item", collection: @batchless_items %>
+  </tbody>
+</table>

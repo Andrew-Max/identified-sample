@@ -1,16 +1,25 @@
-.header {
-  display: block;
+.navbar-default {
+  background-color: white;
+  border: none;
+  margin-bottom: 0;
 
-  .nav-item {
-    display: inline-block;
+  .container-fluid {
+    padding: 0;
+  }
+  .navbar-header a {
+    color: #333;
+    font-size: 36px;
 
-    &.right {
-      float: right;
-      margin-top: 25px;
-      margin-left: 30px;
-      text-decoration: none;
-      font-size: 24px;
-      color: #428BCA;
+    &:hover {
+      color: #111!important;
+    }
+  }
+  a.dropdown-toggle {
+    font-size: 24px;
+    color: #428BCA!important;
+
+    &:hover {
+      color: #005DAD!important;
     }
   }
   hr {

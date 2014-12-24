@@ -1,0 +1,42 @@
+table {
+  margin-bottom: 50px;
+
+  th, tr, td {
+    width: 150px;
+    height: 30px;
+    border: 1px solid #444;
+    text-align: center;
+    font-size: 16px;
+
+    &.name {
+      width: 400px;
+    }
+  }
+  tr:nth-child(even) {
+    background-color: #ccc;
+  }
+}
+.clearance-batch th {
+  background: #5AD7F4;
+}
+.items-index th {
+  background: #FFAAFE;
+}
+.clearance-batches {
+  margin-top: 50px;
+
+  th {
+    background: #A5EF8C
+  }
+  th, tr, td {
+    width: 400px;
+  }
+}
+.statistics {
+  th {
+    background: #FF946E;
+  }
+  td {
+    background: #FBC4B1;
+  }
+}
