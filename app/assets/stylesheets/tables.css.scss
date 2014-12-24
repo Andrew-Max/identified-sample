@@ -22,12 +22,21 @@ table {
 .items-index th {
   background: #FFAAFE;
 }
+.clearance-batches {
+  margin-top: 50px;
 
+  th {
+    background: #A5EF8C
+  }
+  th, tr, td {
+    width: 400px;
+  }
+}
 .statistics {
   th {
-    background: #59F255;
+    background: #FF946E;
   }
   td {
-    background: #FF946E;
+    background: #FBC4B1;
   }
 }

@@ -9,23 +9,15 @@
 <body>
 
   <div class="container <%= controller_name %> <%= action_name %>">
-    <div class="header">
-      <div class="nav-item left">
-        <h1>Stitch Fix Clearance Tool</h1>
-      </div>
-      <div class="nav-item right">
-        <%= link_to("View All Items", items_path) %>
-      </div>
-      <div class="nav-item right">
-        <%= link_to("Clearance Items", clearance_batches_path) %>
-      </div>
-      <hr>
-    </div>
+
+    <%= render "layouts/header" %>
+
     <%- if flash[:notice] -%>
       <div class="alert alert-info" role="alert">
         <%= flash[:notice].html_safe %>
       </div>
     <%- end -%>
+
     <%- if flash[:alert] -%>
       <div class="alert alert-danger" role="alert">
         <%= flash[:alert].html_safe %>
