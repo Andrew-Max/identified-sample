@@ -14,6 +14,7 @@ class Item < ActiveRecord::Base
   end
 
   def acceptably_clearance_priced?
+    # can be shorter with price ceiling
     if HIGH_PRICE_ITEMS.include?(style.type.downcase)
       clearance_price >= 5
     else
