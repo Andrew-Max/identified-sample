@@ -6,6 +6,7 @@ class ClearanceBatchesController < ApplicationController
   end
 
   def create
+    # this is doing way too much; refactor
     clearancing_status = ClearancingService.new.process_file(params[:csv_batch_file].tempfile)
     clearance_batch    = clearancing_status.clearance_batch
     alert_messages     = []
@@ -20,6 +21,10 @@ class ClearanceBatchesController < ApplicationController
     end
     flash[:alert] = alert_messages.join("<br/>") if alert_messages.any?
     redirect_to action: :index
+  end
+
+  def show
+    @batch = ClearanceBatch.find(params[:id])
   end
 
   private
