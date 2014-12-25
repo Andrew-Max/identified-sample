@@ -1,8 +1,10 @@
+<h2>Clearance Batches By Entering Ids</h2>
+
 <%= form_tag(clearance_batches_path, class: 'form-inline loose', role: 'form') do %>
   <div class="form-group">
     <h4>Enter or scan in ids seprated by commas ie: 1, 13, 5</h4>
     <h6>Click and drag on the bottom right corner to expand the box</h6>
-    <%= text_area_tag 'ids',"", class: 'form-control' %>
+    <%= text_area_tag 'ids',"", class: 'id-input form-control' %>
     <%= hidden_field_tag "loose", true %>
   </div>
   <%= button_tag 'submit ids', class: 'btn btn-primary', data: { disable_with: "Submitting..." } %>

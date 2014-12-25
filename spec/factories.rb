@@ -12,6 +12,7 @@ FactoryGirl.define do
   end
 
   factory :style do
+    type "Pants"
     wholesale_price 55
   end
 end
