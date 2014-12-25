@@ -1,11 +1,14 @@
 <h1>Items By Batch</h1>
 
+
 <%= render partial: "batch", collection: @batches %>
 <hr class="thick">
 
 <h1>Items Not In Batches</h1>
 
-<table class="items-index">
+<input type="button" onclick="tableToExcel('no-batch', 'newfile')" value="Export to Excel">
+<table id="no-batch" class="items-index">
+
 <%= render "tables/loose_item_statistics", items: @batchless_items %>
 
   <%= render "tables/item_header" %>
@@ -13,3 +16,4 @@
     <%= render partial: "item", collection: @batchless_items %>
   </tbody>
 </table>
+

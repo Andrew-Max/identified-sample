@@ -5,7 +5,7 @@
     <%= text_area_tag 'ids',"", class: 'form-control' %>
     <%= hidden_field_tag "loose", true %>
   </div>
-  <%= button_tag 'upload batch file', class: 'btn btn-primary', data: { disable_with: "Submitting..." } %>
+  <%= button_tag 'submit ids', class: 'btn btn-primary', data: { disable_with: "Submitting..." } %>
 <% end %>
 
 <a href="/?loose=false" class="switch btn btn-success">Switch to CSV Input</a>
