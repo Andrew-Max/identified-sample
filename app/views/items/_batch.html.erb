@@ -1,6 +1,7 @@
 <h3>Batch <%= batch.id %></h3>
 
-<table class="clearance-batch">
+<input type="button" onclick="tableToExcel('batch-<%= batch.id %>', 'newfile')" value="Export to Excel">
+<table id="batch-<%= batch.id %>"class="clearance-batch">
 
   <%= render "tables/item_header" %>
   <tbody>

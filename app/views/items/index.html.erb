@@ -1,4 +1,6 @@
-<table class="items-index">
+<input type="button" onclick="tableToExcel('items', 'newfile')" value="Export to Excel">
+
+<table id="items" class="items-index">
   <%= render "tables/loose_item_statistics", items: @items %>
 
   <%= render "tables/item_header" %>
