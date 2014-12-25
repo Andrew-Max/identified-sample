@@ -7,10 +7,16 @@ class Item < ActiveRecord::Base
   belongs_to :clearance_batch
 
   scope :sellable, -> { where(status: 'sellable') }
+  scope :sweaters, -> { where(["style_id=? OR style_id=?",1,2]) }
+  scope :tops, -> { where(style_id: 3) }
+  scope :dresses, -> { where(["style_id=? OR style_id=?",4,5]) }
+  scope :scarves, -> { where(style_id: 7) }
+  scope :pants, -> { where(["style_id=? OR style_id=?",6,8]) }
 
   def clearance!
     update_attributes!(status: 'clearanced',
-                       price_sold: clearance_price)
+                       price_sold: clearance_price,
+                       sold_at: DateTime.now)
   end
 
   def acceptably_clearance_priced?

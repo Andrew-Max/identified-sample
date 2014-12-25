@@ -1,42 +1,11 @@
 <h3>Batch <%= batch.id %></h3>
 
 <table class="clearance-batch">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Type</th>
-      <th class="name">Name</th>
-      <th>Size</th>
-      <th>Color</th>
-      <th>Status</th>
-      <th>Price</th>
-      <th>Sold On</th>
-    </tr>
-  </thead>
+
+  <%= render "tables/item_header" %>
   <tbody>
-    <%= render partial: "item", collection: batch.items %>
+    <%= render partial: "items/item", collection: batch.items %>
   </tbody>
-  <tbody class="statistics">
-    <tr>
-      <th>Total Items</th>
-      <th>Sweaters</th>
-      <th>Pants</th>
-      <th>Tops</th>
-      <th>Dresses</th>
-      <th>Scarves</th>
-      <th>Average Price</th>
-      <th>Total Price</th>
-    </tr>
-    <tr>
-    <!-- move to presenter -->
-      <td><%= batch.items.count %></td>
-      <td><%= batch.items.where(["style_id=? OR style_id=?",1,2]).count %></td>
-      <td><%= batch.items.where(["style_id=? OR style_id=?",6,8]).count %></td>
-      <td><%= batch.items.where(style_id: 3).count %></td>
-      <td><%= batch.items.where(["style_id=? OR style_id=?",4,5]).count %></td>
-      <td><%= batch.items.where(style_id: 7).count %></td>
-      <td><%=  '%.2f' % batch.average_price %></td>
-      <td><%= '%.2f' % batch.total_cost %></td>
-    </tr>
-  </tbody>
+
+  <%= render "tables/batch_statistics", batch: batch %>
 </table>
