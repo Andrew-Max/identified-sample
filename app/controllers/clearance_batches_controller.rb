@@ -6,7 +6,7 @@ class ClearanceBatchesController < ApplicationController
   before_action :set_batch_ids, only: :create
 
   def index
-    @accept_loose = params[:loose]
+    @accept_loose = params[:loose] == "true"
     @clearance_batches  = ClearanceBatch.all
   end
 
@@ -17,7 +17,9 @@ class ClearanceBatchesController < ApplicationController
   def create
     clearancing_status = ClearancingService.new.clearance_batch(@batch)
     set_alert_messages(clearancing_status)
-    redirect_to action: :index
+    action = { action: :index }
+    action[:loose] = true if params[:loose]
+    redirect_to action
   end
 
   private
@@ -25,7 +27,7 @@ class ClearanceBatchesController < ApplicationController
   def check_valid_inputs
     if params[:csv_file]
       check_valid_file
-    elsif params[:loose_ids]
+    elsif params[:loose]
       check_valid_input_string
     end
   end

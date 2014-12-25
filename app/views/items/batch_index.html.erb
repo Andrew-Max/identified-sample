@@ -6,42 +6,9 @@
 <h1>Items Not In Batches</h1>
 
 <table class="items-index">
-  <thead class="statistics">
-    <tr>
-      <th>Total Items</th>
-      <th>Sweaters</th>
-      <th>Pants</th>
-      <th>Tops</th>
-      <th>Dresses</th>
-      <th>Scarves</th>
-      <th>Average Price</th>
-      <th>Total Price</th>
-    </tr>
-    <tr>
-     <!-- move to presenter -->
-      <td><%= @batchless_items.count %></td>
-      <td><%= @batchless_items.where(["style_id=? OR style_id=?",1,2]).count %></td>
-      <td><%= @batchless_items.where(["style_id=? OR style_id=?",6,8]).count %></td>
-      <td><%= @batchless_items.where(style_id: 3).count %></td>
-      <td><%= @batchless_items.where(["style_id=? OR style_id=?",4,5]).count %></td>
-      <td><%= @batchless_items.where(style_id: 7).count %></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </thead>
-  <tr></tr><tr></tr>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Type</th>
-      <th class="name">Name</th>
-      <th>Size</th>
-      <th>Color</th>
-      <th>Status</th>
-      <th>Price</th>
-      <th>Sold On</th>
-    </tr>
-  </thead>
+<%= render "tables/loose_item_statistics", items: @batchless_items %>
+
+  <%= render "tables/item_header" %>
   <tbody>
     <%= render partial: "item", collection: @batchless_items %>
   </tbody>

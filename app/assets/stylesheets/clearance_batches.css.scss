@@ -10,3 +10,12 @@
     display: block;
   }
 }
+.input-form {
+  position: relative;
+
+  a.switch  {
+    position: absolute;
+    top: 0;
+    left: 550px;
+  }
+}

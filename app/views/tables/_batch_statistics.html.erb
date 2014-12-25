@@ -1,0 +1,24 @@
+<tbody class="statistics">
+  <tr>
+    <th>Total Items</th>
+    <th>Sweaters</th>
+    <th>Tops</th>
+    <th>Dresses</th>
+    <th>Scarves</th>
+    <th>Pants</th>
+    <th>Average Price</th>
+    <th>Total Price</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><%= batch.items.count %></td>
+    <td><%= batch.items.sweaters.count %></td>
+    <td><%= batch.items.tops.count %></td>
+    <td><%= batch.items.dresses.count %></td>
+    <td><%= batch.items.scarves.count %></td>
+    <td><%= batch.items.pants.count %></td>
+    <td><%=  '%.2f' % batch.average_price %></td>
+    <td><%= '%.2f' % batch.total_cost %></td>
+    <td></td>
+  </tr>
+</tbody>
