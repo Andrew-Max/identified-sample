@@ -6,8 +6,9 @@ class ClearanceBatchesController < ApplicationController
   before_action :set_batch_ids, only: :create
 
   def index
+    # note that this is hack
     @accept_loose = params[:loose] == "true"
-    @clearance_batches  = ClearanceBatch.all
+    @clearance_batches = ClearanceBatch.all
   end
 
   def show
@@ -36,7 +37,8 @@ class ClearanceBatchesController < ApplicationController
     if params[:csv_batch_file] == nil
       message = "You did not chose a file to upload"
     elsif !(params[:csv_batch_file].original_filename.split(".").last == "csv")
-      message = "The file you uploaded was not a csv"
+      # would want to check mime type on a production application
+      message = "The file you uploaded was not a CSV file"
     end
 
     if message

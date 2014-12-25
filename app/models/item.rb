@@ -2,6 +2,8 @@ class Item < ActiveRecord::Base
 
   CLEARANCE_PRICE_PERCENTAGE  = BigDecimal.new("0.75")
   HIGH_PRICE_ITEMS = ["pants", "dress"]
+  SIZES = { S: "Small", M: "Medium", L: "Large", ANY: "One Size Fits All" }
+
 
   belongs_to :style
   belongs_to :clearance_batch
@@ -28,4 +30,7 @@ class Item < ActiveRecord::Base
     style.wholesale_price * CLEARANCE_PRICE_PERCENTAGE
   end
 
+  def human_readable_size
+    SIZES[size.upcase.to_sym]
+  end
 end
