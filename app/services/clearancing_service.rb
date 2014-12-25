@@ -2,31 +2,19 @@ require 'csv'
 require 'ostruct'
 class ClearancingService
 
-  def process_file(uploaded_file)
-    clearancing_status = create_clearancing_status
-
-    CSV.foreach(uploaded_file, headers: false) do |row|
-      potential_item_id = row[0].to_i
-      clearancing_error = get_errors(potential_item_id)
-      if clearancing_error
-        clearancing_status.errors << clearancing_error
-      else
-        clearancing_status.item_ids_to_clearance << potential_item_id
-      end
-    end
-
-    clearance_items!(clearancing_status)
+  def process_batch(batch)
+    # note clean interface
+    @clearancing_status = create_clearancing_status
+    batch.each { |potential_item_id| add_to_clearance_status(potential_item_id) }
+    clearance_items!(@clearancing_status)
   end
 
 private
 
-  # only get items once
-  # this should clearance items not statuses?
   def clearance_items!(clearancing_status)
-    if clearancing_status.item_ids_to_clearance.any?
+    if clearancing_status.clearancable_items.any?
       clearancing_status.clearance_batch.save!
-      clearancing_status.item_ids_to_clearance.each do |item_id|
-        item = Item.find(item_id)
+      clearancing_status.clearancable_items.each do |item|
         item.clearance!
         clearancing_status.clearance_batch.items << item
       end
@@ -34,27 +22,30 @@ private
     clearancing_status
   end
 
-  def get_errors(potential_item_id)
+  def add_to_clearance_status(potential_item_id)
+    # note this being large cuz single query
+    errors = @clearancing_status.errors
     if potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
-      return "Item with id: #{potential_item_id} is not valid"
+      return errors << "Item # #{potential_item_id} is not valid"
     end
 
     item = Item.where(id: potential_item_id).first
 
     if item.blank?
-      return "Item with id: #{potential_item_id} could not be found"
+      return errors << "Item # #{potential_item_id} could not be found"
     elsif !(item.status == "sellable")
-      return "Item with id: #{potential_item_id} could not be clearanced"
+      return errors << "Item # #{potential_item_id} could not be clearanced"
     elsif !(item.acceptably_clearance_priced?)
-      return "Item with id: #{potential_item_id} does not the minimum clearance pricing criteria"
+      return errors << "Item # #{potential_item_id} does not meet the minimum clearance pricing criteria"
     end
+
+    @clearancing_status.clearancable_items << item
   end
 
   def create_clearancing_status
     OpenStruct.new(
       clearance_batch: ClearanceBatch.new,
-      item_ids_to_clearance: [],
+      clearancable_items: [],
       errors: [])
   end
-
 end
