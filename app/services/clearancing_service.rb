@@ -1,12 +1,11 @@
-require 'csv'
 require 'ostruct'
 class ClearancingService
 
-  def process_batch(batch)
+  def clearance_batch(batch)
     # note clean interface
-    @clearancing_status = create_clearancing_status
-    batch.each { |potential_item_id| add_to_clearance_status(potential_item_id) }
-    clearance_items!(@clearancing_status)
+    clearancing_status = create_clearancing_status
+    batch.each { |potential_item_id| add_to_clearancing_status(clearancing_status, potential_item_id) }
+    clearance_items!(clearancing_status)
   end
 
 private
@@ -22,9 +21,9 @@ private
     clearancing_status
   end
 
-  def add_to_clearance_status(potential_item_id)
+  def add_to_clearancing_status(clearancing_status, potential_item_id)
     # note this being large cuz single query
-    errors = @clearancing_status.errors
+    errors = clearancing_status.errors
     if potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
       return errors << "Item # #{potential_item_id} is not valid"
     end
@@ -39,7 +38,7 @@ private
       return errors << "Item # #{potential_item_id} does not meet the minimum clearance pricing criteria"
     end
 
-    @clearancing_status.clearancable_items << item
+    clearancing_status.clearancable_items << item
   end
 
   def create_clearancing_status
