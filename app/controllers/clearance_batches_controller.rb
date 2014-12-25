@@ -1,6 +1,7 @@
+require 'csv'
+
 class ClearanceBatchesController < ApplicationController
-  require 'csv'
-  # might want to move most of this over to the service
+  # note why its worth it to validate hear to keep clearing service modular
   before_action :check_valid_inputs, only: :create
   before_action :set_batch_ids, only: :create
 
@@ -14,8 +15,7 @@ class ClearanceBatchesController < ApplicationController
   end
 
   def create
-    clearancing_status = ClearancingService.new.process_batch(@batch)
-
+    clearancing_status = ClearancingService.new.clearance_batch(@batch)
     set_alert_messages(clearancing_status)
     redirect_to action: :index
   end
@@ -23,7 +23,6 @@ class ClearanceBatchesController < ApplicationController
   private
 
   def check_valid_inputs
-    # needs to grab errors if they exist and short circuit if neccessary
     if params[:csv_file]
       check_valid_file
     elsif params[:loose_ids]
