@@ -10,12 +10,9 @@ gem "bootstrap-sass", "~> 3.2.0"
 
 gem "sdoc", "~> 0.4.0",          group: :doc
 
-group :development do
+group :test, :development do
   gem "pry"
   gem 'pry-nav'
-end
-
-group :test, :development do
   gem "spring"
   gem "rspec-rails"
   gem "factory_girl_rails"

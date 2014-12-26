@@ -3,7 +3,7 @@
     <%= hidden_field_tag "csv_file", true %>
     <%= file_field_tag 'csv_batch_file', class: 'form-control'%>
   </div>
-  <%= submit_tag 'upload batch file', class: 'btn btn-primary', data: { disable_with: "Submitting..." } %>
+  <%= button_tag 'upload batch file', class: 'btn btn-primary', data: { disable_with: "Submitting..." } %>
 <% end %>
 
 <a href="/?loose=true" class="switch btn btn-success">Switch to Id Input</a>
