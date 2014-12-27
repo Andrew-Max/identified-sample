@@ -4,7 +4,6 @@ class Item < ActiveRecord::Base
   HIGH_PRICE_ITEMS = ["pants", "dress"]
   SIZES = { S: "Small", M: "Medium", L: "Large", ANY: "One Size Fits All" }
 
-
   belongs_to :style
   belongs_to :clearance_batch
 
