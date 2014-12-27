@@ -1,5 +1,6 @@
 <% style = item.style %>
 <% item.price_sold ||= 0.00 %>
+<% date = item.sold_at.blank? ? nil : item.sold_at.strftime("%D") %>
 
 <tr class="item">
   <td><%= item.id %></td>
@@ -10,5 +11,5 @@
   <td><%= item.color %></td>
   <td><%= item.status %></td>
   <td><%= '%.2f' % item.price_sold %></td>
-  <td><%= item.sold_at %></td>
+  <td><%= date %></td>
 </tr>
