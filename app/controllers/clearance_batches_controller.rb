@@ -1,12 +1,10 @@
 require 'csv'
 
 class ClearanceBatchesController < ApplicationController
-  # note why its worth it to validate hear to keep clearing service modular
   before_action :check_valid_inputs, only: :create
   before_action :set_batch_ids, only: :create
 
   def index
-    # note that this is hack
     @accept_loose = params[:loose] == "true"
     @clearance_batches = ClearanceBatch.all
   end
@@ -74,6 +72,7 @@ class ClearanceBatchesController < ApplicationController
   def set_alert_messages(clearancing_status)
     clearance_batch = clearancing_status.clearance_batch
     alert_messages = []
+
     if clearance_batch.persisted?
       flash[:notice]  = "#{clearance_batch.items.count} items clearanced in batch #{clearance_batch.id}"
     else
