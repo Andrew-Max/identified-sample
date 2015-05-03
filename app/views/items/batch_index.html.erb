@@ -6,10 +6,9 @@
 <h1>Items Not In Batches</h1>
 
 <input type="button" onclick="tableToExcel('no-batch', 'newfile')" value="Export to Excel">
-<table id="no-batch" class="items-index">
 
 <%= render "tables/loose_item_statistics", items: @batchless_items %>
-
+<table id="no-batch" class="items-index data-table">
   <%= render "tables/item_header" %>
   <tbody>
     <%= render partial: "item", collection: @batchless_items %>

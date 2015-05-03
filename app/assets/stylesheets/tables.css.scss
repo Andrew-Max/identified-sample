@@ -1,6 +1,4 @@
 table {
-  margin-bottom: 50px;
-
   th, tr, td {
     width: 150px;
     height: 30px;
@@ -17,6 +15,7 @@ table {
   }
 }
 .clearance-batch th {
+  margin-bottom: 50px;
   background: #5AD7F4;
 }
 .items-index th {

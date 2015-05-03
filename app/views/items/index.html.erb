@@ -1,8 +1,7 @@
 <input type="button" onclick="tableToExcel('items', 'newfile')" value="Export to Excel">
 
-<table id="items" class="items-index">
-  <%= render "tables/loose_item_statistics", items: @items %>
-
+<%= render "tables/loose_item_statistics", items: @items %>
+<table id="items" class="items-index data-table">
   <%= render "tables/item_header" %>
   <tbody>
     <%= render partial: "item", collection: @items %>
