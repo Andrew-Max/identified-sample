@@ -10,10 +10,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clearance Items<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              <a href="/">Clearance By Batch</a>
+              <%= link_to "Clearance By Batch", root_path %>
             </li>
             <li>
-              <a href="/?loose=true">Clearance By Id</a>
+              <%= link_to "Clearance By Id", root_path(loose: true) %>
             </li>
           </ul>
         </li>
@@ -21,10 +21,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View All Items<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              <a href="/items">View Items By Id</a>
+              <%= link_to "View Items By Id", items_path %>
             </li>
             <li>
-              <a href="/items?by_batch=true">View Items By Batch</a>
+              <%= link_to "View Items By Batch", items_path(by_batch: true) %>
             </li>
           </ul>
         </li>
