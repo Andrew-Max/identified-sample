@@ -1,16 +1,27 @@
-<h1>Items By Batch</h1>
+<% if @batches.any? || @batchless_items.any? %>
 
-<%= render partial: "batch", collection: @batches %>
-<hr class="thick">
+  <% if @batches.any? %>
+    <h1>Items By Batch</h1>
 
-<h1>Items Not In Batches</h1>
+    <%= render partial: "batch", collection: @batches %>
+    <hr class="thick">
+  <% end %>
 
-<input type="button" onclick="tableToExcel('no-batch', 'newfile')" value="Export to Excel">
+  <% if @batchless_items.any? %>
+    <h1>Items Not In Batches</h1>
 
-<%= render "tables/loose_item_statistics", items: @batchless_items %>
-<table id="no-batch" class="items-index data-table">
-  <%= render "tables/item_header" %>
-  <tbody>
-    <%= render partial: "item", collection: @batchless_items %>
-  </tbody>
-</table>
+    <input type="button" onclick="tableToExcel('no-batch', 'newfile')" value="Export to Excel">
+
+    <%= render "tables/loose_item_statistics", items: @batchless_items %>
+    <table id="no-batch" class="items-index data-table">
+      <%= render "tables/item_header" %>
+      <tbody>
+        <%= render partial: "item", collection: @batchless_items %>
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
+  <div class="no-content">
+    <h1>There are currently no items in the system.</h1>
+  </div>
+<% end %>

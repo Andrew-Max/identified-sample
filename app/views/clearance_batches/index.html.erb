@@ -6,24 +6,30 @@
   <% end %>
 </div>
 
-<input class= "index-export" type="button" onclick="tableToExcel('main', 'newfile')" value="Export to Excel">
-<table id="main" class="clearance-batches data-table">
-  <thead>
-    <tr>
-      <th>Batch Id</th>
-      <th>Date clearanced</th>
-      <th>Number of Items Clearanced</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%- @clearance_batches.each do |clearance_batch| -%>
+<% if @clearance_batches.any?  %>
+  <input class= "index-export" type="button" onclick="tableToExcel('main', 'newfile')" value="Export to Excel">
+  <table id="main" class="clearance-batches data-table">
+    <thead>
       <tr>
-        <td>Clearance Batch <%= clearance_batch.id %></td>
-        <td><%= l(clearance_batch.created_at, format: :short) %></td>
-        <td><%= clearance_batch.items.count %></td>
-        <td><%= link_to("View Clearance Report", clearance_batch_path(clearance_batch)) %></td>
+        <th>Batch Id</th>
+        <th>Date clearanced</th>
+        <th>Number of Items Clearanced</th>
+        <th></th>
       </tr>
-    <%- end -%>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <%- @clearance_batches.each do |clearance_batch| -%>
+        <tr>
+          <td>Clearance Batch <%= clearance_batch.id %></td>
+          <td><%= l(clearance_batch.created_at, format: :short) %></td>
+          <td><%= clearance_batch.items.count %></td>
+          <td><%= link_to("View Clearance Report", clearance_batch_path(clearance_batch)) %></td>
+        </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-content">
+    <h1>You have not clearanced any batches yet. Use the form above to set batches of items to status: 'clearance'.</h1>
+  </div>
+<% end %>
