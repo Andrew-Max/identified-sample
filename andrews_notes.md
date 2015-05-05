@@ -6,12 +6,9 @@ Besides that I just tried to keep the controller actions clean and move more spe
 
 - I considered breaking the input validators out into there own services but ended up deciding it was a wash in terms of value as they are pretty small now. If there was any more complex logic in them or in the event that there were other apps which could reuse those validations than I think it would make sense to break them out into seperate services.
 
-- My focus on refactoring the clearancing service was to keep its public interface really clean and focused. An app which uses the service now needs to know very little about it besides one public method and what data it accepts. The service was also making multiple unneccessary queries so I started caching valid items in the clearincing_status meaning the database only has to be hit once for each item.
-
-- In terms of designing the app,the main thing I kept in mind was keeping it clean and simple. Given really limited data about who is using this app and how they use it most design decisions are essentially guesses. Given this lack of data I leaned towards the simplest designs which met the criteria and tried to avoid overengineering things which may not be useful to end endusers. Given the chance to do a little user research I'm guessing there would be a lot of oppurtunities to refine the way the data is presented and how it can be accessed ie different sorts and the ability to search for specific content.
+- My focus on refactoring the clearancing service was to keep its public interface as clean as possible. An app which uses the service now needs to know very little about it besides one public method and what data it accepts. The service was also making multiple unneccessary queries so I started caching valid items in the clearincing_status meaning the database only has to be hit once for each item.
 
 - I added a script which allows downloading all the tables in the app as excel files. I consider this an extra and it isn't production ready. It doesn't really work on my machine (it downloads just the text which you can open with excel) but I'm guessing it may work on a windows machine??
 
-- Nothing really interesting going on the models. Tried to keep them clean and strictly related to modeling the object they represent.
 
 - Tried to keep the views as modular as possible
